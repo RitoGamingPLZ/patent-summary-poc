@@ -1,0 +1,8 @@
+fastapi
+sqlalchemy
+openai
+nltk
+uvicorn
+pydantic
+python-dotenv
+fuzzywuzzy

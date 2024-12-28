@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8000:8000" # Map backend port 8000
+    environment:
+      - DATABASE_URL=sqlite:///./patent_data.db # Add any environment variables here
+      - DATABASE_PATH =./patent_data.db
+      - OPENAI_API_KEY=<your key here>
+    volumes:
+      - ./backend:/app # Mount the backend code for live updates (optional)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile # Create a Dockerfile for the frontend, if needed
+    container_name: frontend
+    ports:
+      - "3000:3000" # Assuming the frontend runs on port 3000
+    volumes:
+      - ./frontend:/app # Mount the frontend code for live updates (optional)
+    depends_on:
+      - backend
